@@ -13,8 +13,8 @@
 #define IO_Heat B, 3
 #define IO_ADC_T 2 //portb.4 adc2
 
-#define ADC_T_dt 5 //5 °C
-#define ADC_T_SET 180 //180 °C
+#define ADC_T_dt 5 //5 ï¿½C
+#define ADC_T_SET 180 //180 ï¿½C
 #define ADC_T_OFF (ADC_T_SET + ADC_T_dt)
 #define ADC_T_ON (ADC_T_SET - ADC_T_dt)
 
@@ -22,7 +22,7 @@
 #define T_B 3950 // B-coef
 #define T_SERIAL_R 10000 // R, 10 ???
 #define T_THERMISTOR_R 100000 // RT, 100 ???
-#define T_NOMINAL 25 //°C, T with RT = 100kOm
+#define T_NOMINAL 25 //ï¿½C, T with RT = 100kOm
 
 int calcT(int v) 
 {
@@ -41,7 +41,7 @@ int calcT(int v)
 
 #define MOVE_SENS_MINUTES 15 //minutes
 #define CYCLE_TIMEOUT_MS 100
-#define MOVE_SENS_TIMEOUT (MOVE_SENS_MINUTES*60*(CYCLE_TIMEOUT_MS/1000))
+#define MOVE_SENS_TIMEOUT (MOVE_SENS_MINUTES*60/(1000/CYCLE_TIMEOUT_MS))
 
 #define REF_AVCC (0<<REFS0) // reference = AVCC
 #define REF_INT  (1<<REFS0) // internal reference 1.1 V

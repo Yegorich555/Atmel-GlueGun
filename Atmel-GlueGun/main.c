@@ -1,9 +1,9 @@
 /*
- * Atmel-GlueGun.c
- *
- * Created: 08.11.2018 14:49:50
- * Author : Yegorich555
- */ 
+* Atmel-GlueGun.c
+*
+* Created: 08.11.2018 14:49:50
+* Author : Yegorich555
+*/
 #define F_CPU 9600000UL
 #include <avr/io.h>
 #include <extensions.h>
@@ -12,6 +12,11 @@
 #define IO_MoveSens B, 0
 #define IO_Heat B, 3
 #define IO_ADC_T 2 //portb.4 adc2
+
+#define ADC_T_dt 5 //5 °C
+#define ADC_T_SET 180 //180 °C
+#define ADC_T_OFF (ADC_T_SET + ADC_T_dt)
+#define ADC_T_ON (ADC_T_SET - ADC_T_dt)
 
 #define REF_AVCC (0<<REFS0) // reference = AVCC
 #define REF_INT  (1<<REFS0) // internal reference 1.1 V
@@ -25,7 +30,6 @@
 #include <uart_soft.h>
 #endif
 
-
 void adc_init(void)
 {
 	ADCSRA = (1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(0<<ADPS0); // prescaler 64 => 125 kHz
@@ -36,12 +40,9 @@ void adc_init(void)
 unsigned int read_adc(unsigned char adc_input)
 {
 	ADMUX=adc_input | ADC_VREF_TYPE;
-	// Delay needed for the stabilization of the ADC input voltage
-	_delay_us(10);
-	// Start the AD conversion
-	ADCSRA|=(1<<ADSC);
-	// Wait for the AD conversion to complete
-	while ((ADCSRA & (1<<ADIF))==0);
+	_delay_us(10); // Delay needed for the stabilization of the ADC input voltage
+	ADCSRA|=(1<<ADSC); // Start the AD conversion
+	while ((ADCSRA & (1<<ADIF))==0); // Wait for the AD conversion to complete
 	ADCSRA|=(1<<ADIF);
 	return ADCW;
 }
@@ -76,11 +77,17 @@ int main(void)
 			tMeasure += read_adc(IO_ADC_T);
 		}
 		tMeasure = tMeasure/adcCount;
-		//if (tMeasure <= ADC_T_Off)
-		//{
-			//io_resetPort(IO_Fan); //todo check
-			//_puts("Fan_Off");
-		//}
+		
+		if (tMeasure >= ADC_T_OFF)
+		{
+			io_resetPort(IO_Heat);
+			_puts("Off");
+		}
+		else if (tMeasure <= ADC_T_ON) {
+			io_setPort(IO_Heat);
+			_puts("On");
+		}
+		
 		#if DEBUG
 		usoft_putStringf("adc:");
 

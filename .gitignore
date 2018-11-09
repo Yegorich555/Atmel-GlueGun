@@ -1,1 +1,3 @@
-Atmel-GlueGun/\.vs/
+\.vs/
+*.pdsbak
+*.pdsprj.*.workspace

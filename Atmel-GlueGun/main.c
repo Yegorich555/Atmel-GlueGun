@@ -9,9 +9,9 @@
 #include <extensions.h>
 #include <util/delay.h>
 
-#define IO_MoveSens B, 3
-#define IO_Heat B, 4
-#define IO_ADC_T 1 //portb.2 adc1
+#define IO_MoveSens B, 0
+#define IO_Heat B, 3
+#define IO_ADC_T 2 //portb.4 adc2
 
 #define REF_AVCC (0<<REFS0) // reference = AVCC
 #define REF_INT  (1<<REFS0) // internal reference 1.1 V
@@ -29,7 +29,7 @@
 void adc_init(void)
 {
 	ADCSRA = (1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(0<<ADPS0); // prescaler 64 => 125 kHz
-	DIDR0|=(0<<ADC0D) | (0<<ADC2D) | (0<<ADC3D) | (1<<ADC1D); //disable digital input for selected ADC
+	DIDR0 |= (0<<ADC0D)|(0<<ADC1D)|(1<<ADC2D)|(0<<ADC3D); //disable digital input for selected ADC
 }
 
 // Read the AD conversion result

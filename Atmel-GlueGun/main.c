@@ -6,7 +6,7 @@
 */
 #define F_CPU 9600000UL
 #include <avr/io.h>
-#include <extensions.h>
+#include <extensions.h> //add ref to Atmel-Library and reload Studio
 #include <util/delay.h>
 
 #define IO_MoveSens B, 0
@@ -17,6 +17,27 @@
 #define ADC_T_SET 180 //180 °C
 #define ADC_T_OFF (ADC_T_SET + ADC_T_dt)
 #define ADC_T_ON (ADC_T_SET - ADC_T_dt)
+
+// 1/T = 1/T0 + 1/B*ln(R/R0) - Steinhart-Hart equation
+#define T_B 3950 // B-coef
+#define T_SERIAL_R 10000 // R, 10 ???
+#define T_THERMISTOR_R 100000 // RT, 100 ???
+#define T_NOMINAL 25 //°C, T with RT = 100kOm
+
+int calcT(int v) 
+{
+	float r = 1023.0 / v - 1;
+	r = T_SERIAL_R / r; //resistance
+	
+	 float steinhart;
+	 steinhart = r / T_THERMISTOR_R; // (R/Ro)
+	 steinhart = log(steinhart); // ln(R/Ro)
+	 steinhart /= T_B; // 1/B * ln(R/Ro)
+	 steinhart += 1.0 / (T_NOMINAL + 273.15); // + (1/To)
+	 steinhart = 1.0 / steinhart; // Invert
+	 steinhart -= 273.15;
+	 return (int)steinhart;
+}
 
 #define MOVE_SENS_MINUTES 15 //minutes
 #define CYCLE_TIMEOUT_MS 100
@@ -73,7 +94,7 @@ int main(void)
 
 	while (1)
 	{
-		//move sensor behavior
+		//moveSensor behavior
 		if (io_getPin(IO_MoveSens))
 		{
 			delay_ms(10);
@@ -97,7 +118,8 @@ int main(void)
 			_delay_us(100);
 			tMeasure += read_adc(IO_ADC_T);
 		}
-		tMeasure = tMeasure/adcCount;
+		tMeasure = calcT(tMeasure/adcCount);
+		
 		
 		if (tMeasure >= ADC_T_OFF)
 		{

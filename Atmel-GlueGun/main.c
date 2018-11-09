@@ -18,6 +18,10 @@
 #define ADC_T_OFF (ADC_T_SET + ADC_T_dt)
 #define ADC_T_ON (ADC_T_SET - ADC_T_dt)
 
+#define MOVE_SENS_MINUTES 15 //minutes
+#define CYCLE_TIMEOUT_MS 100
+#define MOVE_SENS_TIMEOUT (MOVE_SENS_MINUTES*60*(CYCLE_TIMEOUT_MS/1000))
+
 #define REF_AVCC (0<<REFS0) // reference = AVCC
 #define REF_INT  (1<<REFS0) // internal reference 1.1 V
 
@@ -59,6 +63,7 @@ const int adcCount = 10;
 int main(void)
 {
 	int tMeasure;
+	int moveSensCount = 0;
 	io_set(DDR, IO_Heat);
 	
 	adc_init();
@@ -68,8 +73,24 @@ int main(void)
 
 	while (1)
 	{
-		io_resetPort(IO_Heat);
+		//move sensor behavior
+		if (io_getPin(IO_MoveSens))
+		{
+			delay_ms(10);
+			if (io_getPin(IO_MoveSens))
+			{
+				moveSensCount = 0;
+			}
+			
+		}
+		if (moveSensCount >= MOVE_SENS_TIMEOUT)
+		{
+			io_resetPort(IO_Heat);
+			_puts("OffMove");
+			continue;
+		}
 		
+		//heater behavior
 		tMeasure = 0;
 		for (uint8_t i = 0; i < adcCount; ++i)
 		{
@@ -87,6 +108,7 @@ int main(void)
 			io_setPort(IO_Heat);
 			_puts("On");
 		}
+		++moveSensCount;
 		
 		#if DEBUG
 		usoft_putStringf("adc:");
@@ -105,6 +127,9 @@ int main(void)
 
 		usoft_putChar(48 + tMeasure);
 		usoft_putChar(0x0D);
+		_delay_ms(80); //cycle about 100ms
+		#else
+		_delay_ms(89); //cycle about 100ms
 		#endif
 	}
 }

@@ -13,30 +13,31 @@
 #define IO_Heat B, 3
 #define IO_ADC_T 2 //portb.4 adc2
 
-#define ADC_T_dt 5 //5 ï¿½C
-#define ADC_T_SET 180 //180 ï¿½C
-#define ADC_T_OFF (ADC_T_SET + ADC_T_dt)
-#define ADC_T_ON (ADC_T_SET - ADC_T_dt)
-
 // 1/T = 1/T0 + 1/B*ln(R/R0) - Steinhart-Hart equation
 #define T_B 3950 // B-coef
-#define T_SERIAL_R 10000 // R, 10 ???
-#define T_THERMISTOR_R 100000 // RT, 100 ???
-#define T_NOMINAL 25 //ï¿½C, T with RT = 100kOm
+#define T_SERIAL_R 10000 //kOm, 10
+#define T_NOMINAL_R 100000 //kOm, 100
+#define T_NOMINAL 25 //°C, T with RT = 100kOm
 
-int calcT(int v) 
+#define ADC_T_dt 5 //°C
+#define ADC_T_SET 120 //°C
+#define T_CALC(v) 1023 - (int)(1023.0/T_NOMINAL_R*pow(exp(1), T_B*(1.0/(v+273.15) - 1.0/(T_NOMINAL+273.15)) + log(T_NOMINAL_R)))
+#define ADC_TD_OFF T_CALC(ADC_T_SET + ADC_T_dt) //calculated into descrets
+#define ADC_TD_ON  T_CALC(ADC_T_SET - ADC_T_dt) //calculated into descrets
+
+int calcT(int v) //not used because it's a huge logic for Attiny13
 {
 	float r = 1023.0 / v - 1;
 	r = T_SERIAL_R / r; //resistance
 	
-	 float steinhart;
-	 steinhart = r / T_THERMISTOR_R; // (R/Ro)
-	 steinhart = log(steinhart); // ln(R/Ro)
-	 steinhart /= T_B; // 1/B * ln(R/Ro)
-	 steinhart += 1.0 / (T_NOMINAL + 273.15); // + (1/To)
-	 steinhart = 1.0 / steinhart; // Invert
-	 steinhart -= 273.15;
-	 return (int)steinhart;
+	float steinhart;
+	steinhart = r / T_NOMINAL_R; // (R/Ro)
+	steinhart = log(steinhart); // ln(R/Ro)
+	steinhart /= T_B; // 1/B * ln(R/Ro)
+	steinhart += 1.0 / (T_NOMINAL + 273.15); // + (1/To)
+	steinhart = 1.0 / steinhart; // Invert
+	steinhart -= 273.15;
+	return (int)steinhart;
 }
 
 #define MOVE_SENS_MINUTES 15 //minutes
@@ -118,15 +119,15 @@ int main(void)
 			_delay_us(100);
 			tMeasure += read_adc(IO_ADC_T);
 		}
-		tMeasure = calcT(tMeasure/adcCount);
+		//tMeasure = calcT(tMeasure/adcCount);
+		tMeasure = tMeasure/adcCount;
 		
-		
-		if (tMeasure >= ADC_T_OFF)
+		if (tMeasure >= ADC_TD_OFF)
 		{
 			io_resetPort(IO_Heat);
 			_puts("Off");
 		}
-		else if (tMeasure <= ADC_T_ON) {
+		else if (tMeasure <= ADC_TD_ON) {
 			io_setPort(IO_Heat);
 			_puts("On");
 		}

@@ -17,10 +17,10 @@
 #define T_B 3950 // B-coef
 #define T_SERIAL_R 10000 //kOm, 10
 #define T_NOMINAL_R 100000 //kOm, 100
-#define T_NOMINAL 25 //°C, T with RT = 100kOm
+#define T_NOMINAL 25 //ï¿½C, T with RT = 100kOm
 
-#define ADC_T_dt 5 //°C
-#define ADC_T_SET 120 //°C
+#define ADC_T_dt 5 //ï¿½C
+#define ADC_T_SET 120 //ï¿½C
 #define T_CALC(v) 1023 - (int)(1023.0/T_NOMINAL_R*pow(exp(1), T_B*(1.0/(v+273.15) - 1.0/(T_NOMINAL+273.15)) + log(T_NOMINAL_R)))
 #define ADC_TD_OFF T_CALC(ADC_T_SET + ADC_T_dt) //calculated into descrets
 #define ADC_TD_ON  T_CALC(ADC_T_SET - ADC_T_dt) //calculated into descrets
@@ -42,7 +42,7 @@ int calcT(int v) //not used because it's a huge logic for Attiny13
 
 #define MOVE_SENS_MINUTES 15 //minutes
 #define CYCLE_TIMEOUT_MS 100
-#define MOVE_SENS_TIMEOUT (MOVE_SENS_MINUTES*60/(1000/CYCLE_TIMEOUT_MS))
+#define MOVE_SENS_TIMEOUT (MOVE_SENS_MINUTES*60*(1000/CYCLE_TIMEOUT_MS))
 
 #define REF_AVCC (0<<REFS0) // reference = AVCC
 #define REF_INT  (1<<REFS0) // internal reference 1.1 V

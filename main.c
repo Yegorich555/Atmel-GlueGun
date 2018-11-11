@@ -10,8 +10,8 @@
 #include <util/delay.h>
 
 #define IO_MoveSens B, 0
-#define IO_Heat B, 3
-#define IO_ADC_T 2 //portb.4 adc2
+#define IO_Heat B, 4
+#define IO_ADC_T 2 //portb.3 adc3
 
 // 1/T = 1/T0 + 1/B*ln(R/R0) - Steinhart-Hart equation
 #define T_B 3950 // B-coef
@@ -62,7 +62,7 @@ int calcT(int v) //not used because it's a huge logic for Attiny13
 void adc_init(void)
 {
 	ADCSRA = (1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(0<<ADPS0); // prescaler 64 => 125 kHz
-	DIDR0 |= (0<<ADC0D)|(0<<ADC1D)|(1<<ADC2D)|(0<<ADC3D); //disable digital input for selected ADC
+	DIDR0 |= (0<<ADC0D)|(0<<ADC1D)|(0<<ADC2D)|(1<<ADC3D); //disable digital input for selected ADC
 }
 
 // Read the AD conversion result

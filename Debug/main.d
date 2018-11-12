@@ -10,15 +10,15 @@ main.d main.o: .././main.c \
  c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- ../../../Atmel-Library/extensions.h \
+ ../../Atmel-Library/extensions.h \
  c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- ../../../Atmel-Library/extensions.c \
+ ../../Atmel-Library/extensions.c \
  c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- ../../../Atmel-Library/extensions.h ../../../Atmel-Library/uart_soft.h \
- ../../../Atmel-Library/uart_soft.c ../../../Atmel-Library/uart_soft.h
+ ../../Atmel-Library/extensions.h ../../Atmel-Library/uart_soft.h \
+ ../../Atmel-Library/uart_soft.c ../../Atmel-Library/uart_soft.h
 
 c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -42,13 +42,13 @@ c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include
 
 c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-../../../Atmel-Library/extensions.h:
+../../Atmel-Library/extensions.h:
 
 c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
 c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
-../../../Atmel-Library/extensions.c:
+../../Atmel-Library/extensions.c:
 
 c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
@@ -56,10 +56,10 @@ c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include
 
 c:\program\ files\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
-../../../Atmel-Library/extensions.h:
+../../Atmel-Library/extensions.h:
 
-../../../Atmel-Library/uart_soft.h:
+../../Atmel-Library/uart_soft.h:
 
-../../../Atmel-Library/uart_soft.c:
+../../Atmel-Library/uart_soft.c:
 
-../../../Atmel-Library/uart_soft.h:
+../../Atmel-Library/uart_soft.h:

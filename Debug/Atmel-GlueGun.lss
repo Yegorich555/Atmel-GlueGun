@@ -3,31 +3,31 @@ Atmel-GlueGun.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000394  00000000  00000000  00000094  2**1
+  0 .text         000003ae  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000001c  00800060  00000394  00000428  2**0
+  1 .data         00000026  00800060  000003ae  00000442  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000005  0080007c  0080007c  00000444  2**0
+  2 .bss          00000005  00800086  00800086  00000468  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000444  2**0
+  3 .comment      00000030  00000000  00000000  00000468  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000474  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000498  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000a8  00000000  00000000  000004b0  2**0
+  5 .debug_aranges 000000a8  00000000  00000000  000004d4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000b6d  00000000  00000000  00000558  2**0
+  6 .debug_info   00000b89  00000000  00000000  0000057c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000554  00000000  00000000  000010c5  2**0
+  7 .debug_abbrev 00000554  00000000  00000000  00001105  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000006a2  00000000  00000000  00001619  2**0
+  8 .debug_line   000006bd  00000000  00000000  00001659  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000188  00000000  00000000  00001cbc  2**2
+  9 .debug_frame  00000188  00000000  00000000  00001d18  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000427  00000000  00000000  00001e44  2**0
+ 10 .debug_str    00000419  00000000  00000000  00001ea0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000092c  00000000  00000000  0000226b  2**0
+ 11 .debug_loc    00000948  00000000  00000000  000022b9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000098  00000000  00000000  00002b97  2**0
+ 12 .debug_ranges 00000098  00000000  00000000  00002c01  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -54,18 +54,18 @@ Disassembly of section .text:
   1c:	10 e0       	ldi	r17, 0x00	; 0
   1e:	a0 e6       	ldi	r26, 0x60	; 96
   20:	b0 e0       	ldi	r27, 0x00	; 0
-  22:	e4 e9       	ldi	r30, 0x94	; 148
+  22:	ee ea       	ldi	r30, 0xAE	; 174
   24:	f3 e0       	ldi	r31, 0x03	; 3
   26:	02 c0       	rjmp	.+4      	; 0x2c <__do_copy_data+0x10>
   28:	05 90       	lpm	r0, Z+
   2a:	0d 92       	st	X+, r0
-  2c:	ac 37       	cpi	r26, 0x7C	; 124
+  2c:	a6 38       	cpi	r26, 0x86	; 134
   2e:	b1 07       	cpc	r27, r17
   30:	d9 f7       	brne	.-10     	; 0x28 <__do_copy_data+0xc>
 
 00000032 <__do_clear_bss>:
   32:	20 e0       	ldi	r18, 0x00	; 0
-  34:	ac e7       	ldi	r26, 0x7C	; 124
+  34:	a6 e8       	ldi	r26, 0x86	; 134
   36:	b0 e0       	ldi	r27, 0x00	; 0
   38:	01 c0       	rjmp	.+2      	; 0x3c <.do_clear_bss_start>
 
@@ -73,11 +73,11 @@ Disassembly of section .text:
   3a:	1d 92       	st	X+, r1
 
 0000003c <.do_clear_bss_start>:
-  3c:	a1 38       	cpi	r26, 0x81	; 129
+  3c:	ab 38       	cpi	r26, 0x8B	; 139
   3e:	b2 07       	cpc	r27, r18
   40:	e1 f7       	brne	.-8      	; 0x3a <.do_clear_bss_loop>
   42:	af d0       	rcall	.+350    	; 0x1a2 <main>
-  44:	a5 c1       	rjmp	.+842    	; 0x390 <_exit>
+  44:	b2 c1       	rjmp	.+868    	; 0x3aa <_exit>
 
 00000046 <__bad_interrupt>:
   46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
@@ -89,12 +89,12 @@ Disassembly of section .text:
 		--num;
 	}
 }
-  48:	10 92 7c 00 	sts	0x007C, r1	; 0x80007c <__data_end>
-  4c:	80 93 7f 00 	sts	0x007F, r24	; 0x80007f <usoft_rx_tx_byte>
-  50:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <usoft_timeCount>
+  48:	10 92 86 00 	sts	0x0086, r1	; 0x800086 <__data_end>
+  4c:	80 93 89 00 	sts	0x0089, r24	; 0x800089 <usoft_rx_tx_byte>
+  50:	10 92 8a 00 	sts	0x008A, r1	; 0x80008a <usoft_timeCount>
   54:	81 e0       	ldi	r24, 0x01	; 1
-  56:	80 93 7e 00 	sts	0x007E, r24	; 0x80007e <usoft_tx_work>
-  5a:	80 91 7e 00 	lds	r24, 0x007E	; 0x80007e <usoft_tx_work>
+  56:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <usoft_tx_work>
+  5a:	80 91 88 00 	lds	r24, 0x0088	; 0x800088 <usoft_tx_work>
   5e:	81 11       	cpse	r24, r1
   60:	fc cf       	rjmp	.-8      	; 0x5a <setChar+0x12>
   62:	08 95       	ret
@@ -118,8 +118,8 @@ Disassembly of section .text:
   82:	08 95       	ret
 
 00000084 <usoft_init>:
-  84:	b8 9a       	sbi	0x17, 0	; 23
-  86:	c0 9a       	sbi	0x18, 0	; 24
+  84:	b9 9a       	sbi	0x17, 1	; 23
+  86:	c1 9a       	sbi	0x18, 1	; 24
   88:	82 e0       	ldi	r24, 0x02	; 2
   8a:	83 bf       	out	0x33, r24	; 51
   8c:	86 e8       	ldi	r24, 0x86	; 134
@@ -131,12 +131,12 @@ Disassembly of section .text:
   98:	08 95       	ret
 
 0000009a <usoft_putChar>:
-  9a:	10 92 7d 00 	sts	0x007D, r1	; 0x80007d <usoft_rx_work>
+  9a:	10 92 87 00 	sts	0x0087, r1	; 0x800087 <usoft_rx_work>
   9e:	d4 df       	rcall	.-88     	; 0x48 <setChar>
   a0:	08 95       	ret
 
 000000a2 <usoft_putCharf>:
-  a2:	10 92 7d 00 	sts	0x007D, r1	; 0x80007d <usoft_rx_work>
+  a2:	10 92 87 00 	sts	0x0087, r1	; 0x800087 <usoft_rx_work>
   a6:	d0 df       	rcall	.-96     	; 0x48 <setChar>
   a8:	08 95       	ret
 
@@ -144,7 +144,7 @@ Disassembly of section .text:
   aa:	cf 93       	push	r28
   ac:	df 93       	push	r29
   ae:	ec 01       	movw	r28, r24
-  b0:	10 92 7d 00 	sts	0x007D, r1	; 0x80007d <usoft_rx_work>
+  b0:	10 92 87 00 	sts	0x0087, r1	; 0x800087 <usoft_rx_work>
   b4:	88 81       	ld	r24, Y
   b6:	88 23       	and	r24, r24
   b8:	29 f0       	breq	.+10     	; 0xc4 <usoft_putString+0x1a>
@@ -161,7 +161,7 @@ Disassembly of section .text:
   ca:	cf 93       	push	r28
   cc:	df 93       	push	r29
   ce:	ec 01       	movw	r28, r24
-  d0:	10 92 7d 00 	sts	0x007D, r1	; 0x80007d <usoft_rx_work>
+  d0:	10 92 87 00 	sts	0x0087, r1	; 0x800087 <usoft_rx_work>
   d4:	88 81       	ld	r24, Y
   d6:	88 23       	and	r24, r24
   d8:	29 f0       	breq	.+10     	; 0xe4 <usoft_putStringf+0x1a>
@@ -198,11 +198,11 @@ ISR(USOFT_tISR)
 	#endif
 
 	++usoft_timeCount;
-  fe:	80 91 80 00 	lds	r24, 0x0080	; 0x800080 <usoft_timeCount>
+  fe:	80 91 8a 00 	lds	r24, 0x008A	; 0x80008a <usoft_timeCount>
  102:	8f 5f       	subi	r24, 0xFF	; 255
- 104:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <usoft_timeCount>
+ 104:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <usoft_timeCount>
 	if (!(usoft_timeCount & 1)) // set mask 1 3 5 7....
- 108:	80 91 80 00 	lds	r24, 0x0080	; 0x800080 <usoft_timeCount>
+ 108:	80 91 8a 00 	lds	r24, 0x008A	; 0x80008a <usoft_timeCount>
  10c:	80 ff       	sbrs	r24, 0
  10e:	2e c0       	rjmp	.+92     	; 0x16c <__vector_3+0x82>
 	{
@@ -210,7 +210,7 @@ ISR(USOFT_tISR)
 	}
 
 	if (usoft_tx_work)
- 110:	80 91 7e 00 	lds	r24, 0x007E	; 0x80007e <usoft_tx_work>
+ 110:	80 91 88 00 	lds	r24, 0x0088	; 0x800088 <usoft_tx_work>
  114:	88 23       	and	r24, r24
  116:	41 f1       	breq	.+80     	; 0x168 <__vector_3+0x7e>
 }
@@ -219,22 +219,22 @@ ISR(USOFT_tISR)
 static void txSend()
 {
 	if (usoft_iBit == 0) //Start bit
- 118:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <__data_end>
+ 118:	80 91 86 00 	lds	r24, 0x0086	; 0x800086 <__data_end>
  11c:	81 11       	cpse	r24, r1
  11e:	02 c0       	rjmp	.+4      	; 0x124 <__vector_3+0x3a>
 	{
 		usoft_txReset();
- 120:	c0 98       	cbi	0x18, 0	; 24
+ 120:	c1 98       	cbi	0x18, 1	; 24
  122:	16 c0       	rjmp	.+44     	; 0x150 <__vector_3+0x66>
 	}
 	else if (usoft_iBit < 9)
- 124:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <__data_end>
+ 124:	80 91 86 00 	lds	r24, 0x0086	; 0x800086 <__data_end>
  128:	89 30       	cpi	r24, 0x09	; 9
  12a:	88 f4       	brcc	.+34     	; 0x14e <__vector_3+0x64>
 	{
 		if (usoft_rx_tx_byte & ( 1 << (usoft_iBit - 1) ))
- 12c:	80 91 7f 00 	lds	r24, 0x007F	; 0x80007f <usoft_rx_tx_byte>
- 130:	20 91 7c 00 	lds	r18, 0x007C	; 0x80007c <__data_end>
+ 12c:	80 91 89 00 	lds	r24, 0x0089	; 0x800089 <usoft_rx_tx_byte>
+ 130:	20 91 86 00 	lds	r18, 0x0086	; 0x800086 <__data_end>
  134:	90 e0       	ldi	r25, 0x00	; 0
  136:	21 50       	subi	r18, 0x01	; 1
  138:	02 c0       	rjmp	.+4      	; 0x13e <__vector_3+0x54>
@@ -246,35 +246,35 @@ static void txSend()
  144:	02 c0       	rjmp	.+4      	; 0x14a <__vector_3+0x60>
 		{
 			usoft_txSet();
- 146:	c0 9a       	sbi	0x18, 0	; 24
+ 146:	c1 9a       	sbi	0x18, 1	; 24
  148:	03 c0       	rjmp	.+6      	; 0x150 <__vector_3+0x66>
 		}
 		else
 		{
 			usoft_txReset();
- 14a:	c0 98       	cbi	0x18, 0	; 24
+ 14a:	c1 98       	cbi	0x18, 1	; 24
  14c:	01 c0       	rjmp	.+2      	; 0x150 <__vector_3+0x66>
 		}
 	}
 	else //Stop bit
 	{
 		usoft_txSet();
- 14e:	c0 9a       	sbi	0x18, 0	; 24
+ 14e:	c1 9a       	sbi	0x18, 1	; 24
 	}
 	
 	if (usoft_iBit == 10) //End parcel action
- 150:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <__data_end>
+ 150:	80 91 86 00 	lds	r24, 0x0086	; 0x800086 <__data_end>
  154:	8a 30       	cpi	r24, 0x0A	; 10
  156:	11 f4       	brne	.+4      	; 0x15c <__vector_3+0x72>
 	{
 		usoft_tx_work = 0;
- 158:	10 92 7e 00 	sts	0x007E, r1	; 0x80007e <usoft_tx_work>
+ 158:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <usoft_tx_work>
 	}
 
 	++usoft_iBit;
- 15c:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <__data_end>
+ 15c:	80 91 86 00 	lds	r24, 0x0086	; 0x800086 <__data_end>
  160:	8f 5f       	subi	r24, 0xFF	; 255
- 162:	80 93 7c 00 	sts	0x007C, r24	; 0x80007c <__data_end>
+ 162:	80 93 86 00 	sts	0x0086, r24	; 0x800086 <__data_end>
  166:	02 c0       	rjmp	.+4      	; 0x16c <__vector_3+0x82>
 	{
 		#if USOFT_TXEN
@@ -282,7 +282,7 @@ static void txSend()
 		#endif
 	}
 	else if (usoft_rx_work)
- 168:	80 91 7d 00 	lds	r24, 0x007D	; 0x80007d <usoft_rx_work>
+ 168:	80 91 87 00 	lds	r24, 0x0087	; 0x800087 <usoft_rx_work>
 	{
 		#if USOFT_RXEN
 		rxReceive();
@@ -307,8 +307,8 @@ void adc_init(void)
 	ADCSRA = (1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(0<<ADPS0); // prescaler 64 => 125 kHz
  17c:	86 e8       	ldi	r24, 0x86	; 134
  17e:	86 b9       	out	0x06, r24	; 6
-	DIDR0 |= (0<<ADC0D)|(0<<ADC1D)|(1<<ADC2D)|(0<<ADC3D); //disable digital input for selected ADC
- 180:	a4 9a       	sbi	0x14, 4	; 20
+	DIDR0 |= (0<<ADC0D)|(0<<ADC1D)|(0<<ADC2D)|(1<<ADC3D); //disable digital input for selected ADC
+ 180:	a3 9a       	sbi	0x14, 3	; 20
  182:	08 95       	ret
 
 00000184 <read_adc>:
@@ -361,7 +361,7 @@ int main(void)
 	int moveSensCount = 0;
 	int heaterMaxCount = 0;
 	io_set(DDR, IO_Heat);
- 1a2:	bb 9a       	sbi	0x17, 3	; 23
+ 1a2:	bc 9a       	sbi	0x17, 4	; 23
 	
 	adc_init();
  1a4:	eb df       	rcall	.-42     	; 0x17c <adc_init>
@@ -423,7 +423,7 @@ int main(void)
 		//moveSensor behavior
 		if (io_getPin(IO_MoveSens))
  1d0:	b0 9b       	sbis	0x16, 0	; 22
- 1d2:	b0 c0       	rjmp	.+352    	; 0x334 <main+0x192>
+ 1d2:	bd c0       	rjmp	.+378    	; 0x34e <main+0x1ac>
 		{
 			delay_ms(10);
  1d4:	c7 01       	movw	r24, r14
@@ -458,7 +458,7 @@ int main(void)
 		if (moveSensCount >= MOVE_SENS_TIMEOUT)
 		{
 			io_resetPort(IO_Heat);
- 1ee:	c3 98       	cbi	0x18, 3	; 24
+ 1ee:	c4 98       	cbi	0x18, 4	; 24
 			_puts("OffMove");
  1f0:	80 e6       	ldi	r24, 0x60	; 96
  1f2:	90 e0       	ldi	r25, 0x00	; 0
@@ -487,7 +487,7 @@ int main(void)
 		{
 			_delay_us(100);
 			tMeasure += read_adc(IO_ADC_T);
- 20a:	82 e0       	ldi	r24, 0x02	; 2
+ 20a:	83 e0       	ldi	r24, 0x03	; 3
  20c:	bb df       	rcall	.-138    	; 0x184 <read_adc>
  20e:	c8 0f       	add	r28, r24
  210:	d9 1f       	adc	r29, r25
@@ -508,268 +508,294 @@ int main(void)
 		tMeasure = tMeasure/adcCount;
  218:	ce 01       	movw	r24, r28
  21a:	b7 01       	movw	r22, r14
- 21c:	92 d0       	rcall	.+292    	; 0x342 <__divmodhi4>
+ 21c:	9f d0       	rcall	.+318    	; 0x35c <__divmodhi4>
  21e:	5b 01       	movw	r10, r22
-		
+		if (tMeasure < 20 || tMeasure > 1010){
+ 220:	9b 01       	movw	r18, r22
+ 222:	24 51       	subi	r18, 0x14	; 20
+ 224:	31 09       	sbc	r19, r1
+ 226:	2f 3d       	cpi	r18, 0xDF	; 223
+ 228:	33 40       	sbci	r19, 0x03	; 3
+ 22a:	38 f0       	brcs	.+14     	; 0x23a <main+0x98>
+			heaterMaxCount = 0;
+			io_resetPort(IO_Heat);
+ 22c:	c4 98       	cbi	0x18, 4	; 24
+			_puts("T broken");
+ 22e:	88 e6       	ldi	r24, 0x68	; 104
+ 230:	90 e0       	ldi	r25, 0x00	; 0
+ 232:	b3 df       	rcall	.-154    	; 0x19a <_puts>
+			tMeasure += read_adc(IO_ADC_T);
+		}
+		//tMeasure = calcT(tMeasure/adcCount);
+		tMeasure = tMeasure/adcCount;
+		if (tMeasure < 20 || tMeasure > 1010){
+			heaterMaxCount = 0;
+ 234:	c1 2c       	mov	r12, r1
+ 236:	d1 2c       	mov	r13, r1
+			io_resetPort(IO_Heat);
+			_puts("T broken");
+			continue;
+ 238:	cb cf       	rjmp	.-106    	; 0x1d0 <main+0x2e>
+		}
 		if (tMeasure >= ADC_TD_OFF)
- 220:	6b 3d       	cpi	r22, 0xDB	; 219
- 222:	23 e0       	ldi	r18, 0x03	; 3
- 224:	72 07       	cpc	r23, r18
- 226:	3c f0       	brlt	.+14     	; 0x236 <main+0x94>
+ 23a:	6e 35       	cpi	r22, 0x5E	; 94
+ 23c:	23 e0       	ldi	r18, 0x03	; 3
+ 23e:	72 07       	cpc	r23, r18
+ 240:	3c f0       	brlt	.+14     	; 0x250 <main+0xae>
 		{
 			heaterMaxCount = 0;
 			io_resetPort(IO_Heat);
- 228:	c3 98       	cbi	0x18, 3	; 24
+ 242:	c4 98       	cbi	0x18, 4	; 24
 			_puts("Off");
- 22a:	88 e6       	ldi	r24, 0x68	; 104
- 22c:	90 e0       	ldi	r25, 0x00	; 0
- 22e:	b5 df       	rcall	.-150    	; 0x19a <_puts>
-		//tMeasure = calcT(tMeasure/adcCount);
-		tMeasure = tMeasure/adcCount;
-		
+ 244:	81 e7       	ldi	r24, 0x71	; 113
+ 246:	90 e0       	ldi	r25, 0x00	; 0
+ 248:	a8 df       	rcall	.-176    	; 0x19a <_puts>
+			_puts("T broken");
+			continue;
+		}
 		if (tMeasure >= ADC_TD_OFF)
 		{
 			heaterMaxCount = 0;
- 230:	c1 2c       	mov	r12, r1
- 232:	d1 2c       	mov	r13, r1
- 234:	13 c0       	rjmp	.+38     	; 0x25c <main+0xba>
+ 24a:	c1 2c       	mov	r12, r1
+ 24c:	d1 2c       	mov	r13, r1
+ 24e:	13 c0       	rjmp	.+38     	; 0x276 <main+0xd4>
 			io_resetPort(IO_Heat);
 			_puts("Off");
 		}
 		else if (tMeasure <= ADC_TD_ON) {
- 236:	61 3d       	cpi	r22, 0xD1	; 209
- 238:	73 40       	sbci	r23, 0x03	; 3
- 23a:	84 f4       	brge	.+32     	; 0x25c <main+0xba>
+ 250:	68 35       	cpi	r22, 0x58	; 88
+ 252:	73 40       	sbci	r23, 0x03	; 3
+ 254:	84 f4       	brge	.+32     	; 0x276 <main+0xd4>
 			
 			if (heaterMaxCount >= HEATER_MAX_TIME)
- 23c:	88 e5       	ldi	r24, 0x58	; 88
- 23e:	c8 16       	cp	r12, r24
- 240:	82 e0       	ldi	r24, 0x02	; 2
- 242:	d8 06       	cpc	r13, r24
- 244:	24 f0       	brlt	.+8      	; 0x24e <main+0xac>
+ 256:	88 e5       	ldi	r24, 0x58	; 88
+ 258:	c8 16       	cp	r12, r24
+ 25a:	82 e0       	ldi	r24, 0x02	; 2
+ 25c:	d8 06       	cpc	r13, r24
+ 25e:	24 f0       	brlt	.+8      	; 0x268 <main+0xc6>
 			{
 				_puts("MaxTime");
- 246:	8c e6       	ldi	r24, 0x6C	; 108
- 248:	90 e0       	ldi	r25, 0x00	; 0
- 24a:	a7 df       	rcall	.-178    	; 0x19a <_puts>
- 24c:	07 c0       	rjmp	.+14     	; 0x25c <main+0xba>
+ 260:	85 e7       	ldi	r24, 0x75	; 117
+ 262:	90 e0       	ldi	r25, 0x00	; 0
+ 264:	9a df       	rcall	.-204    	; 0x19a <_puts>
+ 266:	07 c0       	rjmp	.+14     	; 0x276 <main+0xd4>
 			}
 			else
 			{
 				++heaterMaxCount;
- 24e:	9f ef       	ldi	r25, 0xFF	; 255
- 250:	c9 1a       	sub	r12, r25
- 252:	d9 0a       	sbc	r13, r25
+ 268:	9f ef       	ldi	r25, 0xFF	; 255
+ 26a:	c9 1a       	sub	r12, r25
+ 26c:	d9 0a       	sbc	r13, r25
 				io_setPort(IO_Heat);
- 254:	c3 9a       	sbi	0x18, 3	; 24
+ 26e:	c4 9a       	sbi	0x18, 4	; 24
 				_puts("On");
- 256:	84 e7       	ldi	r24, 0x74	; 116
- 258:	90 e0       	ldi	r25, 0x00	; 0
- 25a:	9f df       	rcall	.-194    	; 0x19a <_puts>
+ 270:	8d e7       	ldi	r24, 0x7D	; 125
+ 272:	90 e0       	ldi	r25, 0x00	; 0
+ 274:	92 df       	rcall	.-220    	; 0x19a <_puts>
 			}
 		}
 		++moveSensCount;
- 25c:	2f ef       	ldi	r18, 0xFF	; 255
- 25e:	42 1a       	sub	r4, r18
- 260:	52 0a       	sbc	r5, r18
+ 276:	2f ef       	ldi	r18, 0xFF	; 255
+ 278:	42 1a       	sub	r4, r18
+ 27a:	52 0a       	sbc	r5, r18
 		
 		#if DEBUG
 		usoft_putStringf("adc:");
- 262:	87 e7       	ldi	r24, 0x77	; 119
- 264:	90 e0       	ldi	r25, 0x00	; 0
- 266:	31 df       	rcall	.-414    	; 0xca <usoft_putStringf>
+ 27c:	80 e8       	ldi	r24, 0x80	; 128
+ 27e:	90 e0       	ldi	r25, 0x00	; 0
+ 280:	24 df       	rcall	.-440    	; 0xca <usoft_putStringf>
 
 		int at = tMeasure /1000;
- 268:	ce 01       	movw	r24, r28
- 26a:	b4 01       	movw	r22, r8
- 26c:	6a d0       	rcall	.+212    	; 0x342 <__divmodhi4>
- 26e:	eb 01       	movw	r28, r22
+ 282:	ce 01       	movw	r24, r28
+ 284:	b4 01       	movw	r22, r8
+ 286:	6a d0       	rcall	.+212    	; 0x35c <__divmodhi4>
+ 288:	eb 01       	movw	r28, r22
 		usoft_putChar(48 + at);
- 270:	86 2f       	mov	r24, r22
- 272:	80 5d       	subi	r24, 0xD0	; 208
- 274:	12 df       	rcall	.-476    	; 0x9a <usoft_putChar>
+ 28a:	86 2f       	mov	r24, r22
+ 28c:	80 5d       	subi	r24, 0xD0	; 208
+ 28e:	05 df       	rcall	.-502    	; 0x9a <usoft_putChar>
 		tMeasure = tMeasure - at * 1000;
- 276:	ce 01       	movw	r24, r28
- 278:	00 24       	eor	r0, r0
- 27a:	96 95       	lsr	r25
- 27c:	87 95       	ror	r24
- 27e:	07 94       	ror	r0
- 280:	96 95       	lsr	r25
- 282:	87 95       	ror	r24
- 284:	07 94       	ror	r0
- 286:	98 2f       	mov	r25, r24
- 288:	80 2d       	mov	r24, r0
- 28a:	8c 1b       	sub	r24, r28
- 28c:	9d 0b       	sbc	r25, r29
- 28e:	00 24       	eor	r0, r0
- 290:	96 95       	lsr	r25
- 292:	87 95       	ror	r24
- 294:	07 94       	ror	r0
- 296:	96 95       	lsr	r25
- 298:	87 95       	ror	r24
- 29a:	07 94       	ror	r0
- 29c:	98 2f       	mov	r25, r24
- 29e:	80 2d       	mov	r24, r0
- 2a0:	8c 0f       	add	r24, r28
- 2a2:	9d 1f       	adc	r25, r29
- 2a4:	88 0f       	add	r24, r24
- 2a6:	99 1f       	adc	r25, r25
- 2a8:	c8 0f       	add	r28, r24
- 2aa:	d9 1f       	adc	r29, r25
- 2ac:	cc 0f       	add	r28, r28
- 2ae:	dd 1f       	adc	r29, r29
- 2b0:	cc 0f       	add	r28, r28
- 2b2:	dd 1f       	adc	r29, r29
- 2b4:	cc 0f       	add	r28, r28
- 2b6:	dd 1f       	adc	r29, r29
- 2b8:	ca 0d       	add	r28, r10
- 2ba:	db 1d       	adc	r29, r11
+ 290:	ce 01       	movw	r24, r28
+ 292:	00 24       	eor	r0, r0
+ 294:	96 95       	lsr	r25
+ 296:	87 95       	ror	r24
+ 298:	07 94       	ror	r0
+ 29a:	96 95       	lsr	r25
+ 29c:	87 95       	ror	r24
+ 29e:	07 94       	ror	r0
+ 2a0:	98 2f       	mov	r25, r24
+ 2a2:	80 2d       	mov	r24, r0
+ 2a4:	8c 1b       	sub	r24, r28
+ 2a6:	9d 0b       	sbc	r25, r29
+ 2a8:	00 24       	eor	r0, r0
+ 2aa:	96 95       	lsr	r25
+ 2ac:	87 95       	ror	r24
+ 2ae:	07 94       	ror	r0
+ 2b0:	96 95       	lsr	r25
+ 2b2:	87 95       	ror	r24
+ 2b4:	07 94       	ror	r0
+ 2b6:	98 2f       	mov	r25, r24
+ 2b8:	80 2d       	mov	r24, r0
+ 2ba:	8c 0f       	add	r24, r28
+ 2bc:	9d 1f       	adc	r25, r29
+ 2be:	88 0f       	add	r24, r24
+ 2c0:	99 1f       	adc	r25, r25
+ 2c2:	c8 0f       	add	r28, r24
+ 2c4:	d9 1f       	adc	r29, r25
+ 2c6:	cc 0f       	add	r28, r28
+ 2c8:	dd 1f       	adc	r29, r29
+ 2ca:	cc 0f       	add	r28, r28
+ 2cc:	dd 1f       	adc	r29, r29
+ 2ce:	cc 0f       	add	r28, r28
+ 2d0:	dd 1f       	adc	r29, r29
+ 2d2:	ca 0d       	add	r28, r10
+ 2d4:	db 1d       	adc	r29, r11
 		
 		at = tMeasure /100;
- 2bc:	ce 01       	movw	r24, r28
- 2be:	b3 01       	movw	r22, r6
- 2c0:	40 d0       	rcall	.+128    	; 0x342 <__divmodhi4>
- 2c2:	5b 01       	movw	r10, r22
+ 2d6:	ce 01       	movw	r24, r28
+ 2d8:	b3 01       	movw	r22, r6
+ 2da:	40 d0       	rcall	.+128    	; 0x35c <__divmodhi4>
+ 2dc:	5b 01       	movw	r10, r22
 		usoft_putChar(48 + at);
- 2c4:	80 e3       	ldi	r24, 0x30	; 48
- 2c6:	86 0f       	add	r24, r22
- 2c8:	e8 de       	rcall	.-560    	; 0x9a <usoft_putChar>
+ 2de:	80 e3       	ldi	r24, 0x30	; 48
+ 2e0:	86 0f       	add	r24, r22
+ 2e2:	db de       	rcall	.-586    	; 0x9a <usoft_putChar>
 		tMeasure = tMeasure - at * 100;
- 2ca:	c5 01       	movw	r24, r10
- 2cc:	88 0f       	add	r24, r24
- 2ce:	99 1f       	adc	r25, r25
- 2d0:	88 0f       	add	r24, r24
- 2d2:	99 1f       	adc	r25, r25
- 2d4:	a8 0e       	add	r10, r24
- 2d6:	b9 1e       	adc	r11, r25
- 2d8:	c5 01       	movw	r24, r10
- 2da:	88 0f       	add	r24, r24
- 2dc:	99 1f       	adc	r25, r25
- 2de:	88 0f       	add	r24, r24
- 2e0:	99 1f       	adc	r25, r25
- 2e2:	a8 0e       	add	r10, r24
- 2e4:	b9 1e       	adc	r11, r25
- 2e6:	aa 0c       	add	r10, r10
- 2e8:	bb 1c       	adc	r11, r11
- 2ea:	aa 0c       	add	r10, r10
- 2ec:	bb 1c       	adc	r11, r11
- 2ee:	ca 19       	sub	r28, r10
- 2f0:	db 09       	sbc	r29, r11
+ 2e4:	c5 01       	movw	r24, r10
+ 2e6:	88 0f       	add	r24, r24
+ 2e8:	99 1f       	adc	r25, r25
+ 2ea:	88 0f       	add	r24, r24
+ 2ec:	99 1f       	adc	r25, r25
+ 2ee:	a8 0e       	add	r10, r24
+ 2f0:	b9 1e       	adc	r11, r25
+ 2f2:	c5 01       	movw	r24, r10
+ 2f4:	88 0f       	add	r24, r24
+ 2f6:	99 1f       	adc	r25, r25
+ 2f8:	88 0f       	add	r24, r24
+ 2fa:	99 1f       	adc	r25, r25
+ 2fc:	a8 0e       	add	r10, r24
+ 2fe:	b9 1e       	adc	r11, r25
+ 300:	aa 0c       	add	r10, r10
+ 302:	bb 1c       	adc	r11, r11
+ 304:	aa 0c       	add	r10, r10
+ 306:	bb 1c       	adc	r11, r11
+ 308:	ca 19       	sub	r28, r10
+ 30a:	db 09       	sbc	r29, r11
 		
 		at = tMeasure /10;
- 2f2:	ce 01       	movw	r24, r28
- 2f4:	b7 01       	movw	r22, r14
- 2f6:	25 d0       	rcall	.+74     	; 0x342 <__divmodhi4>
- 2f8:	5b 01       	movw	r10, r22
+ 30c:	ce 01       	movw	r24, r28
+ 30e:	b7 01       	movw	r22, r14
+ 310:	25 d0       	rcall	.+74     	; 0x35c <__divmodhi4>
+ 312:	5b 01       	movw	r10, r22
 		usoft_putChar(48 + at);
- 2fa:	80 e3       	ldi	r24, 0x30	; 48
- 2fc:	86 0f       	add	r24, r22
- 2fe:	cd de       	rcall	.-614    	; 0x9a <usoft_putChar>
+ 314:	80 e3       	ldi	r24, 0x30	; 48
+ 316:	86 0f       	add	r24, r22
+ 318:	c0 de       	rcall	.-640    	; 0x9a <usoft_putChar>
 		tMeasure = tMeasure - at * 10;
 
 		usoft_putChar(48 + tMeasure);
- 300:	c5 01       	movw	r24, r10
- 302:	88 0f       	add	r24, r24
- 304:	99 1f       	adc	r25, r25
- 306:	88 0f       	add	r24, r24
- 308:	99 1f       	adc	r25, r25
- 30a:	a8 0e       	add	r10, r24
- 30c:	b9 1e       	adc	r11, r25
- 30e:	aa 0c       	add	r10, r10
- 310:	bb 1c       	adc	r11, r11
- 312:	ce 01       	movw	r24, r28
- 314:	8a 19       	sub	r24, r10
- 316:	9b 09       	sbc	r25, r11
- 318:	80 5d       	subi	r24, 0xD0	; 208
- 31a:	bf de       	rcall	.-642    	; 0x9a <usoft_putChar>
+ 31a:	c5 01       	movw	r24, r10
+ 31c:	88 0f       	add	r24, r24
+ 31e:	99 1f       	adc	r25, r25
+ 320:	88 0f       	add	r24, r24
+ 322:	99 1f       	adc	r25, r25
+ 324:	a8 0e       	add	r10, r24
+ 326:	b9 1e       	adc	r11, r25
+ 328:	aa 0c       	add	r10, r10
+ 32a:	bb 1c       	adc	r11, r11
+ 32c:	ce 01       	movw	r24, r28
+ 32e:	8a 19       	sub	r24, r10
+ 330:	9b 09       	sbc	r25, r11
+ 332:	80 5d       	subi	r24, 0xD0	; 208
+ 334:	b2 de       	rcall	.-668    	; 0x9a <usoft_putChar>
 		usoft_putChar(0x0D);
- 31c:	8d e0       	ldi	r24, 0x0D	; 13
- 31e:	bd de       	rcall	.-646    	; 0x9a <usoft_putChar>
+ 336:	8d e0       	ldi	r24, 0x0D	; 13
+ 338:	b0 de       	rcall	.-672    	; 0x9a <usoft_putChar>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 320:	8f ef       	ldi	r24, 0xFF	; 255
- 322:	97 e5       	ldi	r25, 0x57	; 87
- 324:	22 e0       	ldi	r18, 0x02	; 2
- 326:	81 50       	subi	r24, 0x01	; 1
- 328:	90 40       	sbci	r25, 0x00	; 0
- 32a:	20 40       	sbci	r18, 0x00	; 0
- 32c:	e1 f7       	brne	.-8      	; 0x326 <main+0x184>
- 32e:	00 c0       	rjmp	.+0      	; 0x330 <main+0x18e>
- 330:	00 00       	nop
- 332:	4e cf       	rjmp	.-356    	; 0x1d0 <main+0x2e>
+ 33a:	4f ef       	ldi	r20, 0xFF	; 255
+ 33c:	87 e5       	ldi	r24, 0x57	; 87
+ 33e:	92 e0       	ldi	r25, 0x02	; 2
+ 340:	41 50       	subi	r20, 0x01	; 1
+ 342:	80 40       	sbci	r24, 0x00	; 0
+ 344:	90 40       	sbci	r25, 0x00	; 0
+ 346:	e1 f7       	brne	.-8      	; 0x340 <main+0x19e>
+ 348:	00 c0       	rjmp	.+0      	; 0x34a <main+0x1a8>
+ 34a:	00 00       	nop
+ 34c:	41 cf       	rjmp	.-382    	; 0x1d0 <main+0x2e>
 			{
 				moveSensCount = 0;
 			}
 			
 		}
 		if (moveSensCount >= MOVE_SENS_TIMEOUT)
- 334:	88 e2       	ldi	r24, 0x28	; 40
- 336:	48 16       	cp	r4, r24
- 338:	83 e2       	ldi	r24, 0x23	; 35
- 33a:	58 06       	cpc	r5, r24
- 33c:	0c f4       	brge	.+2      	; 0x340 <main+0x19e>
- 33e:	5e cf       	rjmp	.-324    	; 0x1fc <main+0x5a>
- 340:	56 cf       	rjmp	.-340    	; 0x1ee <main+0x4c>
+ 34e:	28 e2       	ldi	r18, 0x28	; 40
+ 350:	42 16       	cp	r4, r18
+ 352:	23 e2       	ldi	r18, 0x23	; 35
+ 354:	52 06       	cpc	r5, r18
+ 356:	0c f4       	brge	.+2      	; 0x35a <main+0x1b8>
+ 358:	51 cf       	rjmp	.-350    	; 0x1fc <main+0x5a>
+ 35a:	49 cf       	rjmp	.-366    	; 0x1ee <main+0x4c>
 
-00000342 <__divmodhi4>:
- 342:	97 fb       	bst	r25, 7
- 344:	07 2e       	mov	r0, r23
- 346:	16 f4       	brtc	.+4      	; 0x34c <__divmodhi4+0xa>
- 348:	00 94       	com	r0
- 34a:	06 d0       	rcall	.+12     	; 0x358 <__divmodhi4_neg1>
- 34c:	77 fd       	sbrc	r23, 7
- 34e:	08 d0       	rcall	.+16     	; 0x360 <__divmodhi4_neg2>
- 350:	0b d0       	rcall	.+22     	; 0x368 <__udivmodhi4>
- 352:	07 fc       	sbrc	r0, 7
- 354:	05 d0       	rcall	.+10     	; 0x360 <__divmodhi4_neg2>
- 356:	3e f4       	brtc	.+14     	; 0x366 <__divmodhi4_exit>
+0000035c <__divmodhi4>:
+ 35c:	97 fb       	bst	r25, 7
+ 35e:	07 2e       	mov	r0, r23
+ 360:	16 f4       	brtc	.+4      	; 0x366 <__divmodhi4+0xa>
+ 362:	00 94       	com	r0
+ 364:	06 d0       	rcall	.+12     	; 0x372 <__divmodhi4_neg1>
+ 366:	77 fd       	sbrc	r23, 7
+ 368:	08 d0       	rcall	.+16     	; 0x37a <__divmodhi4_neg2>
+ 36a:	0b d0       	rcall	.+22     	; 0x382 <__udivmodhi4>
+ 36c:	07 fc       	sbrc	r0, 7
+ 36e:	05 d0       	rcall	.+10     	; 0x37a <__divmodhi4_neg2>
+ 370:	3e f4       	brtc	.+14     	; 0x380 <__divmodhi4_exit>
 
-00000358 <__divmodhi4_neg1>:
- 358:	90 95       	com	r25
- 35a:	81 95       	neg	r24
- 35c:	9f 4f       	sbci	r25, 0xFF	; 255
- 35e:	08 95       	ret
+00000372 <__divmodhi4_neg1>:
+ 372:	90 95       	com	r25
+ 374:	81 95       	neg	r24
+ 376:	9f 4f       	sbci	r25, 0xFF	; 255
+ 378:	08 95       	ret
 
-00000360 <__divmodhi4_neg2>:
- 360:	70 95       	com	r23
- 362:	61 95       	neg	r22
- 364:	7f 4f       	sbci	r23, 0xFF	; 255
+0000037a <__divmodhi4_neg2>:
+ 37a:	70 95       	com	r23
+ 37c:	61 95       	neg	r22
+ 37e:	7f 4f       	sbci	r23, 0xFF	; 255
 
-00000366 <__divmodhi4_exit>:
- 366:	08 95       	ret
+00000380 <__divmodhi4_exit>:
+ 380:	08 95       	ret
 
-00000368 <__udivmodhi4>:
- 368:	aa 1b       	sub	r26, r26
- 36a:	bb 1b       	sub	r27, r27
- 36c:	51 e1       	ldi	r21, 0x11	; 17
- 36e:	07 c0       	rjmp	.+14     	; 0x37e <__udivmodhi4_ep>
+00000382 <__udivmodhi4>:
+ 382:	aa 1b       	sub	r26, r26
+ 384:	bb 1b       	sub	r27, r27
+ 386:	51 e1       	ldi	r21, 0x11	; 17
+ 388:	07 c0       	rjmp	.+14     	; 0x398 <__udivmodhi4_ep>
 
-00000370 <__udivmodhi4_loop>:
- 370:	aa 1f       	adc	r26, r26
- 372:	bb 1f       	adc	r27, r27
- 374:	a6 17       	cp	r26, r22
- 376:	b7 07       	cpc	r27, r23
- 378:	10 f0       	brcs	.+4      	; 0x37e <__udivmodhi4_ep>
- 37a:	a6 1b       	sub	r26, r22
- 37c:	b7 0b       	sbc	r27, r23
+0000038a <__udivmodhi4_loop>:
+ 38a:	aa 1f       	adc	r26, r26
+ 38c:	bb 1f       	adc	r27, r27
+ 38e:	a6 17       	cp	r26, r22
+ 390:	b7 07       	cpc	r27, r23
+ 392:	10 f0       	brcs	.+4      	; 0x398 <__udivmodhi4_ep>
+ 394:	a6 1b       	sub	r26, r22
+ 396:	b7 0b       	sbc	r27, r23
 
-0000037e <__udivmodhi4_ep>:
- 37e:	88 1f       	adc	r24, r24
- 380:	99 1f       	adc	r25, r25
- 382:	5a 95       	dec	r21
- 384:	a9 f7       	brne	.-22     	; 0x370 <__udivmodhi4_loop>
- 386:	80 95       	com	r24
- 388:	90 95       	com	r25
- 38a:	bc 01       	movw	r22, r24
- 38c:	cd 01       	movw	r24, r26
- 38e:	08 95       	ret
+00000398 <__udivmodhi4_ep>:
+ 398:	88 1f       	adc	r24, r24
+ 39a:	99 1f       	adc	r25, r25
+ 39c:	5a 95       	dec	r21
+ 39e:	a9 f7       	brne	.-22     	; 0x38a <__udivmodhi4_loop>
+ 3a0:	80 95       	com	r24
+ 3a2:	90 95       	com	r25
+ 3a4:	bc 01       	movw	r22, r24
+ 3a6:	cd 01       	movw	r24, r26
+ 3a8:	08 95       	ret
 
-00000390 <_exit>:
- 390:	f8 94       	cli
+000003aa <_exit>:
+ 3aa:	f8 94       	cli
 
-00000392 <__stop_program>:
- 392:	ff cf       	rjmp	.-2      	; 0x392 <__stop_program>
+000003ac <__stop_program>:
+ 3ac:	ff cf       	rjmp	.-2      	; 0x3ac <__stop_program>

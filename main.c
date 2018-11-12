@@ -20,7 +20,7 @@
 #define T_NOMINAL 25 //�C, T with RT = 100kOm
 
 #define ADC_T_dt 5 //�C
-#define ADC_T_SET 120 //�C
+#define ADC_T_SET 160 //�C
 #define T_CALC(v) 1023 - (int)(1023.0/T_SERIAL_R*pow(exp(1), T_B*(1.0/(v+273.15) - 1.0/(T_NOMINAL+273.15)) + log(T_NOMINAL_R)))
 #define ADC_TD_OFF T_CALC(ADC_T_SET + ADC_T_dt) //calculated into descrets
 #define ADC_TD_ON  T_CALC(ADC_T_SET - ADC_T_dt) //calculated into descrets

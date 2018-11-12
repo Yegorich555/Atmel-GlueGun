@@ -126,7 +126,12 @@ int main(void)
 		}
 		//tMeasure = calcT(tMeasure/adcCount);
 		tMeasure = tMeasure/adcCount;
-		
+		if (tMeasure < 20 || tMeasure > 1010){
+			heaterMaxCount = 0;
+			io_resetPort(IO_Heat);
+			_puts("T broken");
+			continue;
+		}
 		if (tMeasure >= ADC_TD_OFF)
 		{
 			heaterMaxCount = 0;

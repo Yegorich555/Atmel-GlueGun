@@ -11,7 +11,7 @@
 
 #define IO_MoveSens B, 0
 #define IO_Heat B, 4
-#define IO_ADC_T 2 //portb.3 adc3
+#define IO_ADC_T 3 //portb.3 adc3
 
 // 1/T = 1/T0 + 1/B*ln(R/R0) - Steinhart-Hart equation
 #define T_B 3950 // B-coef
@@ -54,7 +54,7 @@ int calcT(int v) //not used because it's a huge logic for Attiny13
 
 #if DEBUG
 #define USOFT_BAUD 4800
-#define USOFT_IO_TX B, 0
+#define USOFT_IO_TX B, 1
 #define USOFT_RXEN 0
 #include <uart_soft.h>
 #endif

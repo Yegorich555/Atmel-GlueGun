@@ -84,38 +84,43 @@ void _puts(char *str)
 	#endif
 }
 
-const int adcCount = 10;
+const uint8_t adcCount = 10;
+#define setOFF(str) io_resetPort(IO_Heat);heaterMaxCount = 0;_puts(str);
+
 int main(void)
 {
-	int tMeasure;
-	int moveSensCount = 0;
-	int heaterMaxCount = 0;
+	unsigned int tMeasure;
+	unsigned int moveSensCount = 0;
+	uint8_t moveSensLatest = 255;
+	
+	unsigned int heaterMaxCount = 0;
 	io_set(DDR, IO_Heat);
 	
 	adc_init();
 	#if DEBUG
 	usoft_init();
 	#endif
-
+	
 	while (1)
 	{
 		//moveSensor behavior
-		if (io_getPin(IO_MoveSens))
+		for (uint8_t i = 0; i < 94; ++i) //delay_ms(100)
 		{
-			delay_ms(10);
-			if (io_getPin(IO_MoveSens))
+			uint8_t pin = io_getPin(IO_MoveSens);
+			if (pin != moveSensLatest)
 			{
 				moveSensCount = 0;
+				moveSensLatest = pin;
+				_puts("move");
 			}
-			
+			delay_ms(1);
 		}
 		if (moveSensCount >= MOVE_SENS_TIMEOUT)
 		{
-			io_resetPort(IO_Heat);
-			_puts("OffMove");
-			heaterMaxCount = 0;
+			setOFF("OffMove");
 			continue;
 		}
+		++moveSensCount;
 		
 		//heater behavior
 		tMeasure = 0;
@@ -126,17 +131,15 @@ int main(void)
 		}
 		//tMeasure = calcT(tMeasure/adcCount);
 		tMeasure = tMeasure/adcCount;
+		
 		if (tMeasure < 20 || tMeasure > 1010){
-			heaterMaxCount = 0;
-			io_resetPort(IO_Heat);
-			_puts("T broken");
+			setOFF("T broken");
 			continue;
 		}
+		
 		if (tMeasure >= ADC_TD_OFF)
 		{
-			heaterMaxCount = 0;
-			io_resetPort(IO_Heat);
-			_puts("Off");
+			setOFF("Off");
 		}
 		else if (tMeasure <= ADC_TD_ON) {
 			
@@ -151,11 +154,9 @@ int main(void)
 				_puts("On");
 			}
 		}
-		++moveSensCount;
 		
 		#if DEBUG
 		usoft_putStringf("adc:");
-
 		int at = tMeasure /1000;
 		usoft_putChar(48 + at);
 		tMeasure = tMeasure - at * 1000;
@@ -170,9 +171,6 @@ int main(void)
 
 		usoft_putChar(48 + tMeasure);
 		usoft_putChar(0x0D);
-		_delay_ms(80); //cycle about 100ms
-		#else
-		_delay_ms(89); //cycle about 100ms
 		#endif
 	}
 }

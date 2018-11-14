@@ -8,6 +8,7 @@
 #include <avr/io.h>
 #include <extensions.h> //add ref to Atmel-Library and reload Studio
 #include <util/delay.h>
+#include <avr/wdt.h>
 
 #define IO_MoveSens B, 0
 #define IO_Heat B, 4
@@ -103,6 +104,10 @@ int main(void)
 	
 	while (1)
 	{
+		//watchdog behavior
+		wdt_reset();
+		wdt_enable(WDTO_250MS);
+		
 		//moveSensor behavior
 		for (uint8_t i = 0; i < 94; ++i) //delay_ms(100)
 		{
@@ -133,7 +138,7 @@ int main(void)
 		tMeasure = tMeasure/adcCount;
 		
 		if (tMeasure < 20 || tMeasure > 1010){
-			setOFF("T broken");
+			setOFF("T Broken");
 			continue;
 		}
 		

@@ -113,7 +113,7 @@ int main(void)
 				moveSensLatest = pin;
 				_puts("move");
 			}
-			delay_ms(1);
+			_delay_ms(1);
 		}
 		if (moveSensCount >= MOVE_SENS_TIMEOUT)
 		{
@@ -157,19 +157,7 @@ int main(void)
 		
 		#if DEBUG
 		usoft_putStringf("adc:");
-		int at = tMeasure /1000;
-		usoft_putChar(48 + at);
-		tMeasure = tMeasure - at * 1000;
-		
-		at = tMeasure /100;
-		usoft_putChar(48 + at);
-		tMeasure = tMeasure - at * 100;
-		
-		at = tMeasure /10;
-		usoft_putChar(48 + at);
-		tMeasure = tMeasure - at * 10;
-
-		usoft_putChar(48 + tMeasure);
+		usoft_putUInt(tMeasure);
 		usoft_putChar(0x0D);
 		#endif
 	}
